@@ -9,7 +9,7 @@
         
       </template>
       <template #start>
-        <h2>Diccionario electrónico del habla popular de los valles de los ríos Sinú y San Jorge</h2>   
+        <h2>Diccionario de la lengua Kogui y mapa cultural de Córdoba, Antioquia y Magdalena.</h2>   
       </template>
 
       <template #end >

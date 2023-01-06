@@ -6,14 +6,6 @@
           {{ props.row.lema }}
       </b-table-column>
 
-      <b-table-column field="isoglosa" label="Isoglosa" width="50" v-slot="props"  >
-          {{ props.row.isoglosa }}
-      </b-table-column>
-
-      <b-table-column field="acto_de_habla" label="Acto de habla" width="50" v-slot="props" >
-          <p> {{ props.row.acto_de_habla }} </p> 
-      </b-table-column>
-
       <b-table-column field="significado" label="Significado" width="50" v-slot="props" >
           {{ props.row.significado }}
       </b-table-column>
@@ -43,13 +35,13 @@ export default {
       return this.$router.replace('/noauth')
     }  
 
-    let response = await axios.get("https://diccionario-backend.herokuapp.com/refran/");
+    let response = await axios.get("https://dlk-backend-api.onrender.com/refran/");
     this.refranes = response.data; 
     },
   
   methods:{
     async eliminar(id){
-      let response = await axios.delete("https://diccionario-backend.herokuapp.com/refran/" + id)
+      let response = await axios.delete("https://dlk-backend-api.onrender.com/refran/" + id)
       this.refranes = this.refranes.filter((el)=>el._id !== id)
     },
 

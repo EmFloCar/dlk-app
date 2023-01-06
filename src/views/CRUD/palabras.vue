@@ -7,62 +7,6 @@
             <b-input v-model="nueva_palabra.lema" required></b-input>
           </b-field>
 
-          <b-field
-            label="Información gramatical:"
-            style="padding-bottom: 2%"
-          >
-            <b-select
-              v-model="nueva_palabra.informacion_gramatical"
-              expanded
-              required
-              placeholder="seleccione una opción"
-            >
-              <option
-                v-for="elemento in categoriasGramaticales"
-                :value="elemento"
-                :key="elemento"
-              >
-                {{ elemento }}
-              </option>
-            </b-select>
-          </b-field>
-
-          <b-field label="Hiperónimo:" style="padding-bottom: 2%">
-            <b-select
-              v-model="nueva_palabra.hiperonimo"
-              expanded
-              required
-              placeholder="seleccione una opción"
-            >
-              <option
-                v-for="elemento in hiperonimo"
-                :value="elemento"
-                :key="elemento"
-              >
-                {{ elemento }}
-              </option>
-            </b-select>
-          </b-field>
-
-          <b-field label="Etimología:" style="padding-bottom: 2%">
-            <b-input type="textarea" v-model="nueva_palabra.etimologia" required></b-input>
-          </b-field>
-
-          <b-field label="Isoglosa:" style="padding-bottom: 3%">
-            <div class="block centrado" 
-            style="flex-wrap: wrap;">
-              <b-checkbox 
-                v-for="elemento in isoglosa"
-                v-model="nueva_palabra.isoglosa"
-                :native-value="elemento"
-                :key="elemento">
-
-                {{elemento}}
-
-              </b-checkbox>
-            </div>
-            </b-field>
-
           <b-field label="Significado:" style="padding-bottom: 2%">
             <b-input
               type="textarea"
@@ -131,44 +75,10 @@ export default {
     return {
       nueva_palabra: {
         lema: null,
-        informacion_gramatical: null,
-        hiperonimo: null,
-        etimologia: null,
         significado: null,
         ejemplo: null,
         imagenUrl: null,
-        isoglosa: [],
       },
-
-      categoriasGramaticales: [
-        "Sustantivo",
-        "Adjetivo",
-        "Artículo",
-        "Pronombre",
-        "Verbo",
-        "Adverbio",
-        "Interjección",
-        "Preposición",
-        "Conjunción",
-        "Refran",
-        "Frase proverbial",
-        "Locución"
-      ],
-
-      isoglosa: [
-        "Alto Sinú",
-        "Medio Sinú",
-        "Bajo Sinú",
-        "San Jorge",
-        "Costanera",
-        "Sabanas",
-      ],
-
-      hiperonimo: [
-        "Conocimiento de la naturaleza",
-        "El mundo humano",
-        "Acción del hombre sobre la naturaleza",
-      ],
 
       imagen: {},
       palabras: [],
@@ -186,13 +96,9 @@ export default {
     guardar() {
       const fd = new FormData();
       fd.append("lema", this.nueva_palabra.lema);
-      fd.append("informacion_gramatical", this.nueva_palabra.informacion_gramatical);
-      fd.append("hiperonimo", this.nueva_palabra.hiperonimo);
-      fd.append("etimologia", this.nueva_palabra.etimologia);
       fd.append("significado", this.nueva_palabra.significado);
       fd.append("ejemplo", this.nueva_palabra.ejemplo);
       fd.append("file", this.imagen, this.imagen.name);
-      fd.append("isoglosa", this.nueva_palabra.isoglosa);
 
       axios
         .post("https://diccionario-backend.herokuapp.com/palabra/", fd)
@@ -203,13 +109,9 @@ export default {
 
     limpiar() {
       (this.nueva_palabra.lema = null),
-        (this.nueva_palabra.informacion_gramatical = null),
-        (this.nueva_palabra.hiperonimo = null),
-        (this.nueva_palabra.etimologia = null),
-        (this.nueva_palabra.significado = null),
-        (this.nueva_palabra.ejemplo = null);
+      (this.nueva_palabra.significado = null),
+      (this.nueva_palabra.ejemplo = null);
       (this.nueva_palabra.imagenUrl = null),
-        (this.nueva_palabra.isoglosa = []);
       this.deleteDropFile();
     },
 
@@ -235,15 +137,6 @@ export default {
       if (this.nueva_palabra.lema == null || this.nueva_palabra.lema == "" ) {
         this.vacio++;
       }
-      if (this.nueva_palabra.informacion_gramatical == null || this.nueva_palabra.informacion_gramatical == "" ) {
-        this.vacio++;
-      }
-      if (this.nueva_palabra.hiperonimo == null || this.nueva_palabra.hiperonimo  == "" ) {
-        this.vacio++;
-      }
-      if (this.nueva_palabra.etimologia == null || this.nueva_palabra.etimologia == "" ) {
-        this.vacio++;
-      }
       if (this.nueva_palabra.significado == null || this.nueva_palabra.significado == "" ) {
         this.vacio++;
       }
@@ -251,10 +144,6 @@ export default {
         this.vacio++;
       }
       if (this.isEmptyObject(this.imagen) == true) {
-        this.vacio++;
-      }
-
-      if (this.nueva_palabra.isoglosa.length == 0) {
         this.vacio++;
       }
     },

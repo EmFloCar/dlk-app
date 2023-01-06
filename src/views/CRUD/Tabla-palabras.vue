@@ -5,28 +5,12 @@
           {{ props.row.lema }}
       </b-table-column>
 
-      <b-table-column field="informacion_gramatical" label="Información Gramatical" width="50" v-slot="props"  centered>
-          {{ props.row.informacion_gramatical }}
-      </b-table-column>
-
-      <b-table-column field="hiperonimo" label="Hiperónimo" width="50" v-slot="props" centered>
-          {{ props.row.hiperonimo }}
-      </b-table-column>
-
-      <b-table-column field="etimologia" label="Etimología" width="20" v-slot="props" centered>
-          {{ props.row.etimologia }}
-      </b-table-column>
-
       <b-table-column field="significado" label="Significado" width="50" v-slot="props" centered>
           {{ props.row.significado }}
       </b-table-column>
 
       <b-table-column field="ejemplo" label="Ejemplo" width="50" v-slot="props" centered>
           {{ props.row.ejemplo }}
-      </b-table-column>
-
-      <b-table-column field="isoglosa" label="Isoglosa" width="50" v-slot="props" centered>
-          {{ props.row.isoglosa }}
       </b-table-column>
       
       <b-table-column field="imagen" label="imagen" width="50" v-slot="props" centered>
@@ -73,13 +57,13 @@ export default {
       return this.$router.replace('/noauth')
     }  
     
-    let response = await axios.get("https://diccionario-backend.herokuapp.com/palabra/");
+    let response = await axios.get("https://dlk-backend-api.onrender.com/palabra/");
     this.palabras = response.data;
     },
   
   methods:{
     async eliminar(id){
-      await axios.delete("https://diccionario-backend.herokuapp.com/palabra/" + id)
+      await axios.delete("https://dlk-backend-api.onrender.com/palabra/" + id)
       this.palabras = this.palabras.filter((el)=>el._id !== id)
     },
 

@@ -6,30 +6,6 @@
           <b-input v-model="refran.lema"></b-input>
         </b-field>
 
-          <b-field label="Isoglosa:" style="padding-bottom: 3%">
-            <div class="block centrado" 
-            style="flex-wrap: wrap;">
-              <b-checkbox 
-                v-for="elemento in isoglosa"
-                v-model="refran.isoglosa"
-                :native-value="elemento"
-                :key="elemento">
-
-                {{elemento}}
-
-              </b-checkbox>
-            </div>
-            </b-field>
-        
-        <!-- <b-field label="Isoglosa">
-          <b-input v-model="refran.isoglosa">
-          </b-input>
-        </b-field> -->
-
-        <b-field label="Acto de habla:">
-          <b-input v-model="refran.acto_de_habla"></b-input>
-        </b-field>
-
         <b-field label="Significado:">
           <b-input type="textarea" v-model="refran.significado"></b-input>
         </b-field>
@@ -59,18 +35,8 @@ export default {
 
       refran: {
         lema: "",
-        isoglosa: [],
-        acto_de_habla: "",
         significado: "",
       },
-      isoglosa: [
-        "Alto Sinú",
-        "Medio Sinú",
-        "Bajo Sinú",
-        "San Jorge",
-        "Costanera",
-        "Sabanas",
-      ],
     }
   },
   mounted() {
@@ -80,13 +46,11 @@ export default {
   },
   methods: {
     editar() {
-      this.refran.isoglosa = this.refran.isoglosa.toString()
       axios
-        .put("https://diccionario-backend.herokuapp.com/refran/" + this.refranId, this.refran)
+        .put("https://dlk-backend-api.onrender.com/refran/" + this.refranId, this.refran)
         .then((data) => {
           console.log(data.status);
         });
-      this.refran.isoglosa = this.refran.isoglosa.split(",")
     },
 
     salir() {
@@ -104,10 +68,8 @@ export default {
 
   mounted() {
     this.refranId = this.$route.params.id;
-    axios.get("https://diccionario-backend.herokuapp.com/refran/" + this.refranId).then((datos) => {
+    axios.get("https://dlk-backend-api.onrender.com/refran/" + this.refranId).then((datos) => {
       this.refran.lema = datos.data.lema;
-      this.refran.isoglosa = datos.data.isoglosa.split(",");
-      this.refran.acto_de_habla = datos.data.acto_de_habla;
       this.refran.significado = datos.data.significado;
     });
   },

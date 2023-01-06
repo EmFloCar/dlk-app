@@ -16,12 +16,22 @@
           >
         </b-navbar-dropdown>
 
-        <b-navbar-dropdown label="REFRAN" hoverable>
+        <b-navbar-dropdown label="ORACION" hoverable>
           <router-link to="/crud/refranes">
             <b-navbar-item >Añadir</b-navbar-item>
           </router-link>
 
           <router-link to="/crud/tabla-refranes">
+            <b-navbar-item>Editar</b-navbar-item>
+          </router-link>
+        </b-navbar-dropdown>
+
+        <b-navbar-dropdown label="INFORMACIÓN" hoverable>
+          <router-link to="/crud/info">
+            <b-navbar-item >Añadir</b-navbar-item>
+          </router-link>
+
+          <router-link to="/crud/tabla-info">
             <b-navbar-item>Editar</b-navbar-item>
           </router-link>
         </b-navbar-dropdown>

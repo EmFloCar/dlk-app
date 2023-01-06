@@ -11,6 +11,7 @@ const routes = [
       { path: '', name: 'buscar', component: () => import('../views/SearchAndView/Search.vue') },
       { path: 'palabra/:id', name: 'palabra', component: () => import ('../views/SearchAndView/Palabra.vue')},
       { path: 'refran/:id', name: 'refran', component: () => import ('../views/SearchAndView/Refran.vue')},
+      { path: 'info/:id', name: 'info', component: () => import ('../views/SearchAndView/informacion.vue')},
       { path: 'login', name: 'login', component:() => import('../views/login.vue') },
       { path: 'noauth', name: 'noauth', component:()=> import('../views/noAuth.vue')}
     ]},
@@ -18,10 +19,15 @@ const routes = [
     children: [
       { path: 'palabras', name: 'palabras', component: () => import('../views/CRUD/palabras.vue')},
       { path: 'tabla-palabras', name: 'tabla-palabras', component: () => import('../views/CRUD/Tabla-palabras.vue')},
-      { path: 'editar-palabra/:id', name: 'editar-palabra', component: () => import('../views/CRUD/EditarPalabra.vue')},      
+      { path: 'editar-palabra/:id', name: 'editar-palabra', component: () => import('../views/CRUD/EditarPalabra.vue')},
+            
       { path: 'refranes', name: 'refranes', component: () => import('../views/CRUD/refranes.vue')},
       { path: 'tabla-refranes', name: 'tabla-refranes', component: () => import('../views/CRUD/Tabla-refranes.vue')},
-      { path: 'editar-refran/:id', name: 'editar-refran', component: () => import('../views/CRUD/EditarRefran.vue')}
+      { path: 'editar-refran/:id', name: 'editar-refran', component: () => import('../views/CRUD/EditarRefran.vue')},
+      
+      { path: 'info', name: 'info', component: () => import('../views/CRUD/info.vue')},
+      { path: 'tabla-info', name: 'tabla-info', component: () => import('../views/CRUD/Tabla-info.vue')},
+      { path: 'editar-info/:id', name: 'editar-info', component: () => import('../views/CRUD/EditarInfo.vue')},
     ]},
   
 ]

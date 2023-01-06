@@ -6,10 +6,6 @@
             <div class="column is-full centrado">
                 <p>
                     <b> {{ this.palabra.lema }}:</b>
-                    {{ this.palabra.informacion_gramatical }} ({{ this.abreviaturas[this.palabra.informacion_gramatical]}}),
-                    {{ this.palabra.hiperonimo }} ({{ this.abreviaturas[this.palabra.hiperonimo]}}),
-                    {{ this.palabra.etimologia }}.
-                    {{ this.palabra.isoglosa}}.
                     {{ this.palabra.significado }}. 
                     "{{this.palabra.ejemplo}}".
                 </p>
@@ -17,14 +13,11 @@
             
           </div>
           <br>
-          <div class="columns box">
+          <div class="columns">
             <div class="column centrado">
               <figure>
                 <img  class="imgCenter" v-bind:src="this.palabra.imagenUrl" />
               </figure>
-            </div>
-            <div class="column">
-              <mapa :isoglosa="this.palabra.isoglosa.split(', ')"></mapa>
             </div>
           </div>
 
@@ -40,43 +33,17 @@
 
 <script>
 import axios from 'axios';
-import mapa from '../../components/mapa.vue'
 export default {
-    components:{
-      mapa
-    },
+
     data() {
         return {
             id: null,
             palabra: {
               lema: null,
-              informacion_gramatical: null,
-              hiperonimo: null,
-              etimologia: null,
-              isoglosa: null,
               significado: null,
               imagenUrl: null,
               ejemplo: null
             },
-
-            abreviaturas: {
-              Sustantivo: "s",
-              Adjetivo: "adj",
-              Artículo: "art",
-              Pronombre: "pron",
-              Verbo: "v",
-              Adverbio: "adv",
-              Interjección: "interj",
-              Preposición: "prep",
-              Conjunción: "conj",
-              "Conocimiento de la naturaleza": "c.n.",
-              "El mundo humano": "m.h." ,
-              "Acción del hombre sobre la naturaleza": "a.h.",
-              Refran: "refran",
-              "Frase proverbial": "frase provevial",
-              Locución: "locucion"        
-            },
-
         }
 
     },
@@ -89,12 +56,8 @@ export default {
 
     methods: {
         async actualizar(){
-        let datos = await axios.get("https://diccionario-backend.herokuapp.com/palabra/" + this.id);
+        let datos = await axios.get("https://dlk-backend-api.onrender.com/palabra/" + this.id);
         this.palabra.lema = datos.data.lema;
-        this.palabra.informacion_gramatical = datos.data.informacion_gramatical;
-        this.palabra.hiperonimo = datos.data.hiperonimo;
-        this.palabra.etimologia = datos.data.etimologia;
-        this.palabra.isoglosa = datos.data.isoglosa.split(',').join(', ');
         this.palabra.significado = datos.data.significado;
         this.palabra.imagenUrl = datos.data.imagenUrl,
         this.palabra.ejemplo = datos.data.ejemplo;
@@ -112,7 +75,7 @@ export default {
 }
 
 .componente {
-  padding: 40px;
+  padding: 50px;
 }
 
 .centrado {
@@ -134,13 +97,7 @@ export default {
 }
 
 img {
-    max-width: 350px;
+    max-width: 450px;
     max-height: auto;
-}
-
-
-.map{
-  border: 2px;
-  border-color: red;
 }
 </style>

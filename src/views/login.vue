@@ -34,7 +34,7 @@ const axios = require('axios');
 
         methods: {
             login(){
-                axios.post('https://diccionario-backend.herokuapp.com/login', this.input)
+                axios.post('https://dlk-backend-api.onrender.com/login', this.input)
                     .then((response) => {
                         if(response.data.message == "Sesion iniciada con exito"){
                             this.token = response.data.token;

@@ -45,13 +45,13 @@
               </div>
             </div>
           </b-tab-item>
-          <b-tab-item label="REFRANES">
+          <b-tab-item label="ORACIONES">
             <div>
               <div class="columns is-centered" style="padding-top: 10px;">
                 <div class=" column is-half">
                   <b-field>
                     <b-input
-                      placeholder="Buscar refrán..."
+                      placeholder="Buscar oraciones..."
                       type="search"
                       icon-pack="fas"
                       icon="search"
@@ -87,6 +87,51 @@
               </div>
             </div>
           </b-tab-item>
+          <b-tab-item label="INFORMACIÓN">
+            <div>
+              <div class="columns is-centered" style="padding-top: 10px;">
+                <div class=" column is-half">
+                  <b-field>
+                    <b-input
+                      placeholder="Buscar oraciones..."
+                      type="search"
+                      icon-pack="fas"
+                      icon="search"
+                      v-model="searchRefran"
+                      rounded
+                    >
+                    </b-input>
+                  </b-field>
+                </div>
+              </div>
+              <div class="container box column is-one-third" style="height: 400px; overflow:auto;padding:10px;">
+                <div class="centrar">
+                  <img src="../../assets/noResult.png" v-if="noResults" >
+                </div>
+                <div class="box " v-for="info in InfoFiltrada" :key="info._id">
+                  <div class="columns is-centered">
+                    <div class="column is-three-quarters color has-text">
+                      <div>
+                        <b>
+                          <p>
+                            {{ info.lema.toUpperCase() }}
+                          </p>
+                        </b>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <a v-on:click="seleccionarInfo(info._id)"
+                        >Ver más</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </b-tab-item>
+          <b-tab-item label="MAPA" disabled>
+
+          </b-tab-item>
         </b-tabs>
       </section>
     </div>
@@ -100,8 +145,11 @@ export default {
     return {
       palabras: [],
       refranes: [],
+      info:[],
+
       searchPalabra: "",
       searchRefran: "",
+      searchInfo: "",
 
       noResults: false,
 
@@ -112,7 +160,7 @@ export default {
   // tabla
   async mounted() {
     let response = await axios.get(
-      "https://diccionario-backend.herokuapp.com/palabra/"
+      "https://dlk-backend-api.onrender.com/palabra/"
     );
     this.palabras = response.data;
 
@@ -124,11 +172,22 @@ export default {
     
 
     let response2 = await axios.get(
-        "https://diccionario-backend.herokuapp.com/refran/"
+        "https://dlk-backend-api.onrender.com/refran/"
     );
     this.refranes = response2.data;
 
     this.refranes.sort((a, b) => {
+      if(a.lema.toLowerCase() < b.lema.toLowerCase()) return -1
+      if(a.lema.toLowerCase() > b.lema.toLowerCase()) return 1
+      return 0
+    });
+
+    let infoResponse = await axios.get(
+        "https://dlk-backend-api.onrender.com/info/"
+    );
+    this.info = infoResponse.data;
+
+    this.info.sort((a, b) => {
       if(a.lema.toLowerCase() < b.lema.toLowerCase()) return -1
       if(a.lema.toLowerCase() > b.lema.toLowerCase()) return 1
       return 0
@@ -148,6 +207,13 @@ export default {
         refran.lema.toLowerCase().match(this.searchRefran.toLowerCase())
           return refran.lema.toLowerCase().match(this.searchRefran.toLowerCase());
       })     
+    },
+
+    InfoFiltrada: function() {
+      return this.info.filter((data) => {
+        data.lema.toLowerCase().match(this.searchInfo.toLowerCase())
+          return data.lema.toLowerCase().match(this.searchInfo.toLowerCase());
+      })     
     }
   },
 
@@ -158,6 +224,10 @@ export default {
 
     seleccionarRefran(id){
       this.$router.push('/refran/' + id)
+    },
+
+    seleccionarInfo(id){
+      this.$router.push('/info/' + id)
     },
 
 

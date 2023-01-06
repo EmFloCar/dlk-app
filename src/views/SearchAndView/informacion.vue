@@ -3,17 +3,17 @@
       <div class="container">
         <div class="block">
           <div class="columns box">
-            <div class="column is-full centrado">
+            <div class="column is-full centrado block">
                 <p>
-                    <b> {{ this.refran.lema }}:</b>
-                    {{ this.refran.significado }}
+                    <b> {{ this.info.lema }}:</b>
+                    {{ this.info.significado }}
                 </p>
             </div>
           </div>
           <div class="columns">
             <div class="column centrado">
               <figure>
-                <img  class="imgCenter" v-bind:src="this.refran.imagenUrl" />
+                <img  class="imgCenter" v-bind:src="this.info.imagenUrl" />
               </figure>
             </div>
           </div>
@@ -33,7 +33,7 @@ export default {
     data() {
         return {
             id: null,
-            refran: {
+            info: {
               lema: null,
               significado: null,
               imagenUrl: null,
@@ -51,10 +51,10 @@ export default {
 
     methods: {
         async actualizar(){
-        let response = await axios.get("https://dlk-backend-api.onrender.com/refran/" + this.id);
-          this.refran.lema = response.data.lema
-          this.refran.significado = response.data.significado
-          this.refran.imagenUrl = response.data.imagenUrl
+        let response = await axios.get("https://dlk-backend-api.onrender.com/info/" + this.id);
+          this.info.lema = response.data.lema
+          this.info.significado = response.data.significado
+          this.info.imagenUrl = response.data.imagenUrl
         },
     },
 }
@@ -67,7 +67,7 @@ export default {
 }
 
 .componente {
-  padding: 50px 0px 0px 0px;
+  padding: 40px 0px 0px 0px;
 }
 
 .centrado {
@@ -87,6 +87,7 @@ export default {
   align-items: center;
   margin: auto;
 }
+
 img {
     max-width: 450px;
     max-height: auto;
