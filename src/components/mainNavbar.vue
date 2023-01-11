@@ -6,10 +6,10 @@
           <img src="../assets/logo.png" class="universidad">
         </router-link> 
         <img src="../assets/lexicon.png" class="lexicon">
-        
+        <img src="../assets/GICAFS.jpg" class="gicafs">
       </template>
       <template #start>
-        <h2>Diccionario de la lengua Kogui y mapa cultural de Córdoba, Antioquia y Magdalena.</h2>   
+        <h2>Diccionario de la lengua kogui y mapa de acceso a Taiku</h2>   
       </template>
 
       <template #end >
@@ -33,6 +33,7 @@ export default {
 
 <style lang="scss" scoped>
   h2{
+    padding-right: 5rem;
     font-size: 1.5rem;
     display: flex;
     justify-content: center;
@@ -54,6 +55,17 @@ export default {
   height: 65px;
   width: 50px;
   padding-left: 10px;
+}
+
+.gicafs{
+  width: 100px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding-left: 10px;
+  padding-top: 5px;
 }
 
 .centrarConfig{

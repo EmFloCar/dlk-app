@@ -129,8 +129,10 @@
               </div>
             </div>
           </b-tab-item>
-          <b-tab-item label="MAPA" disabled>
-
+          <b-tab-item label="MAPA">
+            <div>
+              <img src="../../assets/mapa.png" alt="">
+            </div>
           </b-tab-item>
         </b-tabs>
       </section>
