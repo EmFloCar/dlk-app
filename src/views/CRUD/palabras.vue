@@ -101,7 +101,7 @@ export default {
       fd.append("file", this.imagen, this.imagen.name);
 
       axios
-        .post("https://diccionario-backend.herokuapp.com/palabra/", fd)
+        .post("https://dlk-backend-api.onrender.com/palabra/", fd)
         .then((response) => {
           console.log(response.status);
         });
