@@ -69,7 +69,6 @@
           significado: "",
           },
         imagen: {},
-        refranes: [],
       } 
     },
     mounted() {
@@ -79,8 +78,15 @@
     },
     
     methods:{
-      //form
       guardar(){
+        if (this.isEmptyObject(this.imagen) == true) {
+          this.noImage()
+        }else{
+          this.hasImage()
+        }
+      },
+      
+      hasImage(){
         const fd = new FormData();
         fd.append("lema", this.nuevaInfo.lema)
         fd.append("significado", this.nuevaInfo.significado)
@@ -90,7 +96,14 @@
           .post("https://dlk-backend-api.onrender.com/info/", fd)
           .then(response=>{console.log(response.status)})
       },
-  
+
+      noImage(){
+        console.error("Hola")
+        axios
+          .post("https://dlk-backend-api.onrender.com/info/", this.nuevaInfo)
+          .then(response=>{console.log(response.status)})
+      },
+
       limpiar(){
         this.nuevaInfo.lema = "",
         this.nuevaInfo.significado = "",
@@ -122,6 +135,14 @@
         this.imagen = {};
       },
       
+      isEmptyObject(obj) {
+      for (var item in obj) {
+        return false;
+      }
+      {
+        return true;
+      }
+    },
     },
   
     }

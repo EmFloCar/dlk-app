@@ -46,7 +46,7 @@
       },
   
       async editar(id){
-        this.$router.push('/crud/editar-refran/' + id)
+        this.$router.push('/crud/editar-info/' + id)
       },
   
       DeletedToast() {
